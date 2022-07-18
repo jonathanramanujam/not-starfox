@@ -23,10 +23,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         lasers = GetComponentsInChildren<ParticleSystem>();
-        foreach (ParticleSystem laser in lasers)
-        {
-            Debug.Log("lasers" + laser);
-        }
     }
 
     private void OnEnable()
