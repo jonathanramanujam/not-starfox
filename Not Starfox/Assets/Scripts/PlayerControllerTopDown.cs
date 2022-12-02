@@ -42,7 +42,7 @@ public class PlayerControllerTopDown : MonoBehaviour
     {
         float horizontalThrow, verticalThrow;
         AdjustPosition(out horizontalThrow, out verticalThrow);
-        // AdjustRotation(horizontalThrow, verticalThrow);
+        AdjustRotation(horizontalThrow, verticalThrow);
         ProcessFire();
     }
 
@@ -67,16 +67,10 @@ public class PlayerControllerTopDown : MonoBehaviour
     }
     private void AdjustRotation(float horizontalThrow, float verticalThrow)
     {
-        float pitchDueToPosition = transform.localPosition.y * positionPitchFactor;
-        float pitchDueToControl = verticalThrow * controlPitchFactor;
-        float yawDueToPosition = transform.localPosition.x * positionYawFactor;
         float rollDueToControl = horizontalThrow * controlRollFactor;
-
-        float pitch = pitchDueToPosition + pitchDueToControl;
-        float yaw = yawDueToPosition;
         float roll = rollDueToControl;
 
-        transform.localRotation = Quaternion.Euler(pitch, yaw, roll);
+        transform.localRotation = Quaternion.Euler(0.0f, 0.0f, roll);
     }
     private void ProcessFire()
     {
