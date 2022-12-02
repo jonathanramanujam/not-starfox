@@ -213,6 +213,10 @@ PrefabInstance:
       propertyPath: field of view
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 4712737440333622230, guid: 5be9de51901ba9347b527c6e62f9d1a2, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 55
+      objectReference: {fileID: 0}
     - target: {fileID: 4712737441325708868, guid: 5be9de51901ba9347b527c6e62f9d1a2, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -263,6 +267,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4712737441774457381, guid: 5be9de51901ba9347b527c6e62f9d1a2, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179164569965025544, guid: 5be9de51901ba9347b527c6e62f9d1a2, type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -378,7 +386,7 @@ GameObject:
   - component: {fileID: 1433765210}
   - component: {fileID: 1433765209}
   - component: {fileID: 1433765208}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Kill Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -580,6 +588,26 @@ MonoBehaviour:
   controlPitchFactor: -30
   positionYawFactor: 20
   controlRollFactor: -40
+--- !u!95 &1597610087
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597610081}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1833710886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -613,7 +641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
       propertyPath: m_LocalPosition.z
