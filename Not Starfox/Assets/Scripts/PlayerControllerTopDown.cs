@@ -19,11 +19,14 @@ public class PlayerControllerTopDown : MonoBehaviour
     [SerializeField] float positionYawFactor = 20f;
     [SerializeField] float controlRollFactor = -40f;
 
-    ParticleSystem[] lasers;
+    [SerializeField] ParticleSystem[] lasers;
+    [SerializeField] ParticleSystem afterburner;
+    ParticleSystem.EmissionModule afterburnerEmission;
 
     void Start()
     {
-        lasers = GetComponentsInChildren<ParticleSystem>();
+        // lasers = GetComponentsInChildren<ParticleSystem>();
+        afterburnerEmission = afterburner.emission;
     }
 
     private void OnEnable()
@@ -48,6 +51,19 @@ public class PlayerControllerTopDown : MonoBehaviour
 
     private void AdjustPosition(out float horizontalThrow, out float verticalThrow)
     {
+        if (movement.ReadValue<Vector2>().y > 0)
+        {
+            afterburnerEmission.rateOverTime = 250;
+        }
+        else if (movement.ReadValue<Vector2>().y < 0)
+        {
+            afterburnerEmission.rateOverTime = 10;
+        }
+        else
+        {
+            afterburnerEmission.rateOverTime = 100;
+        }
+
         horizontalThrow = movement.ReadValue<Vector2>().x;
         if (invertY)
         {

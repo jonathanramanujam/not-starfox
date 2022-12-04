@@ -14,10 +14,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.6415094, g: 0.63230103, b: 0.62577426, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.002
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -153,7 +153,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!320 &99025623
 PlayableDirector:
@@ -219,7 +219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4712737441325708868, guid: 5be9de51901ba9347b527c6e62f9d1a2, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4712737441325708868, guid: 5be9de51901ba9347b527c6e62f9d1a2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -273,6 +273,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7915543577775837278, guid: 5be9de51901ba9347b527c6e62f9d1a2, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5be9de51901ba9347b527c6e62f9d1a2, type: 3}
 --- !u!95 &1085818841 stripped
@@ -316,10 +320,10 @@ Light:
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
-    m_Resolution: -1
+    m_Resolution: 1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
+    m_Bias: 0
     m_NormalBias: 0.4
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
@@ -348,13 +352,13 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 2.4435958e-30, w: 2.2e-44}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -374,6 +378,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 133.53, y: 39.8, z: 0}
+--- !u!198 &1242788968 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5564073764749139424, guid: 5be9de51901ba9347b527c6e62f9d1a2, type: 3}
+  m_PrefabInstance: {fileID: 1085818840}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1292317856 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6856428323002218704, guid: 5be9de51901ba9347b527c6e62f9d1a2, type: 3}
+  m_PrefabInstance: {fileID: 1085818840}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1341074479
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -470,12 +484,32 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 19800002, guid: fae5d333f43a55744ab0c44fecefdcae, type: 3}
+      propertyPath: TrailModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: fae5d333f43a55744ab0c44fecefdcae, type: 3}
       propertyPath: InitialModule.rotation3D
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19800002, guid: fae5d333f43a55744ab0c44fecefdcae, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: fae5d333f43a55744ab0c44fecefdcae, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: fae5d333f43a55744ab0c44fecefdcae, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.4433962
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: fae5d333f43a55744ab0c44fecefdcae, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.43431318
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: fae5d333f43a55744ab0c44fecefdcae, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.41160554
       objectReference: {fileID: 0}
     - target: {fileID: 19800004, guid: fae5d333f43a55744ab0c44fecefdcae, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState
@@ -693,6 +727,18 @@ PrefabInstance:
       propertyPath: InitialModule.startSize.minScalar
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 19900002, guid: fae5d333f43a55744ab0c44fecefdcae, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19900002, guid: fae5d333f43a55744ab0c44fecefdcae, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6f57e3384acd5dc45bb4df479f10466b, type: 2}
+    - target: {fileID: 19900002, guid: fae5d333f43a55744ab0c44fecefdcae, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 09a99b10658931c46a438c586a49ec65, type: 2}
     - target: {fileID: 19900006, guid: fae5d333f43a55744ab0c44fecefdcae, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -807,7 +853,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1460951960
 PrefabInstance:
@@ -818,7 +864,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
       propertyPath: m_Name
-      value: Water Basin
+      value: Water Lower Basin
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
       propertyPath: m_IsActive
@@ -1010,6 +1056,10 @@ MonoBehaviour:
   controlPitchFactor: -30
   positionYawFactor: 20
   controlRollFactor: -40
+  lasers:
+  - {fileID: 1242788968}
+  - {fileID: 1292317856}
+  afterburner: {fileID: 1810502383}
 --- !u!95 &1597610087
 Animator:
   serializedVersion: 4
@@ -1030,6 +1080,11 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!198 &1810502383 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7915543577775837278, guid: 5be9de51901ba9347b527c6e62f9d1a2, type: 3}
+  m_PrefabInstance: {fileID: 1085818840}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1833710886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1191,7 +1246,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2138345998
 PrefabInstance:
@@ -1202,7 +1257,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
       propertyPath: m_Name
-      value: Water Basin (1)
+      value: Water Upper Basin
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
       propertyPath: m_IsActive
@@ -1210,7 +1265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
       propertyPath: m_LocalScale.x
