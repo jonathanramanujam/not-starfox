@@ -25,7 +25,6 @@ public class PlayerControllerTopDown : MonoBehaviour
 
     void Start()
     {
-        // lasers = GetComponentsInChildren<ParticleSystem>();
         afterburnerEmission = afterburner.emission;
     }
 
@@ -104,4 +103,9 @@ public class PlayerControllerTopDown : MonoBehaviour
             isFiring = false;
         }
     }
+
+    // private void OnParticleCollision(GameObject other)
+    // {
+    //     Debug.Log($"Collision: {other.name}");
+    // }
 }
