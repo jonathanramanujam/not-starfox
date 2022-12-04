@@ -13,10 +13,6 @@ public class PlayerControllerTopDown : MonoBehaviour
     [SerializeField] float XRange = 7f;
     [SerializeField] float minZRange= -1f;
     [SerializeField] float maxZRange= 15f;
-
-    [SerializeField] float positionPitchFactor = -10f;
-    [SerializeField] float controlPitchFactor = -30f;
-    [SerializeField] float positionYawFactor = 20f;
     [SerializeField] float controlRollFactor = -40f;
 
     [SerializeField] ParticleSystem[] lasers;

@@ -8,9 +8,13 @@ public class Health : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        if (other.CompareTag("Player Laser"))
+        if (other.layer != gameObject.layer)
         {
-            Debug.Log("Enemy Hit!");
+            healthPoints--;
+            if (healthPoints <= 0)
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 }

@@ -344,7 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 750e5e066b1bfa641aed2b8fd45705ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 0
+  healthPoints: 20
 --- !u!1001 &1085818840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -630,7 +630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5564073764749139427, guid: 5be9de51901ba9347b527c6e62f9d1a2, type: 3}
       propertyPath: m_TagString
-      value: Player Laser
+      value: Laser
       objectReference: {fileID: 0}
     - target: {fileID: 5828102943282598427, guid: 5be9de51901ba9347b527c6e62f9d1a2, type: 3}
       propertyPath: m_Layer
@@ -726,7 +726,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6856428323002218707, guid: 5be9de51901ba9347b527c6e62f9d1a2, type: 3}
       propertyPath: m_TagString
-      value: Player Laser
+      value: Laser
       objectReference: {fileID: 0}
     - target: {fileID: 6967258567500141206, guid: 5be9de51901ba9347b527c6e62f9d1a2, type: 3}
       propertyPath: m_Layer
@@ -1025,6 +1025,14 @@ PrefabInstance:
     - target: {fileID: 11400000, guid: fae5d333f43a55744ab0c44fecefdcae, type: 3}
       propertyPath: maxPower
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: fae5d333f43a55744ab0c44fecefdcae, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: fae5d333f43a55744ab0c44fecefdcae, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19800002, guid: fae5d333f43a55744ab0c44fecefdcae, type: 3}
       propertyPath: TrailModule.enabled
@@ -1599,9 +1607,6 @@ MonoBehaviour:
   XRange: 5
   minZRange: -1
   maxZRange: 15
-  positionPitchFactor: -10
-  controlPitchFactor: -30
-  positionYawFactor: 20
   controlRollFactor: -40
   lasers:
   - {fileID: 1242788968}
@@ -1627,6 +1632,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1597610090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597610081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 750e5e066b1bfa641aed2b8fd45705ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthPoints: 2
+--- !u!136 &1597610091
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597610081}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.5
+  m_Height: 12
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &1810502383 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 7915543577775837278, guid: 5be9de51901ba9347b527c6e62f9d1a2, type: 3}
@@ -1790,14 +1822,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 223241109133242917, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
       propertyPath: m_TagString
-      value: Enemy Laser
+      value: Laser
       objectReference: {fileID: 0}
     - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
       propertyPath: lengthInSec
-      value: 0.5
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: ShapeModule.length
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: TriggerModule.enter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: CollisionModule.type
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
       propertyPath: TrailModule.worldSpace
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: ShapeModule.radiusThickness
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
@@ -1806,15 +1858,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
       propertyPath: InitialModule.maxNumParticles
-      value: 100
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: CollisionModule.m_Bounce.scalar
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
       propertyPath: InitialModule.startSizeZ.scalar
-      value: 19.63
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
       value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: CollisionModule.collisionMessages
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
       propertyPath: TrailModule.widthOverTrail.scalar
@@ -1826,20 +1886,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 208
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: CollisionModule.m_Planes.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0
+      value: 0.043533802
       objectReference: {fileID: 0}
     - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.015969653
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: CollisionModule.m_Planes.Array.data[0]
+      value: 
+      objectReference: {fileID: 675720805}
     - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
       propertyPath: EmissionModule.rateOverDistance.scalar
       value: 1
@@ -1851,6 +1923,10 @@ PrefabInstance:
     - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
       propertyPath: TrailModule.colorOverLifetime.maxColor.g
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: CollisionModule.m_EnergyLossOnCollision.scalar
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
