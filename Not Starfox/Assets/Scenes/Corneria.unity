@@ -14,18 +14,18 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.5641154, g: 0.6724296, b: 0.7169812, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.005
-  m_LinearFogStart: 75
-  m_LinearFogEnd: 400
+  m_LinearFogStart: 100
+  m_LinearFogEnd: 500
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SubtractiveShadowColor: {r: 0, g: 0, b: 0, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 3548a73f93c6d42469c2a1b50d19386c, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 45649444}
   - component: {fileID: 45649442}
-  - component: {fileID: 45649443}
   m_Layer: 20
   m_Name: UI Cam
   m_TagString: Untagged
@@ -184,14 +183,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &45649443
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 45649441}
-  m_Enabled: 1
 --- !u!4 &45649444
 Transform:
   m_ObjectHideFlags: 0
@@ -1097,7 +1088,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4712737440333622230, guid: 5be9de51901ba9347b527c6e62f9d1a2, type: 3}
       propertyPath: far clip plane
-      value: 750
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 4712737440333622230, guid: 5be9de51901ba9347b527c6e62f9d1a2, type: 3}
       propertyPath: m_CullingMask.m_Bits
@@ -2347,7 +2338,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 0.78238684, b: 0.5226415, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -2405,14 +2396,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906902825}
-  m_LocalRotation: {x: -0.78765005, y: 0.18110654, z: -0.2735184, w: -0.52153194}
+  m_LocalRotation: {x: -0.08132406, y: 0.9185659, z: -0.265999, w: -0.2808338}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 112.98, y: 321.7, z: 0}
+  m_LocalEulerAnglesHint: {x: 32.3, y: 214, z: 0}
 --- !u!1 &1913298281
 GameObject:
   m_ObjectHideFlags: 0
