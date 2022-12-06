@@ -40,7 +40,7 @@ public class PlayerControllerTopDown : MonoBehaviour
         fire.Disable();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         float horizontalThrow, verticalThrow;
         AdjustPosition(out horizontalThrow, out verticalThrow);
