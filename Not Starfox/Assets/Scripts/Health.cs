@@ -9,10 +9,14 @@ public class Health : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        if (other.layer != gameObject.layer)
+        if (other.layer == LayerMask.NameToLayer("Lasers"))
         {
-            healthPoints--;
-            DeathCheck();
+            if (!other.CompareTag(tag))
+            {
+                Debug.Log($"Hit: {LayerMask.LayerToName(gameObject.layer)}");
+                healthPoints--;
+                DeathCheck();
+            }
         }
     }
 
@@ -30,11 +34,14 @@ public class Health : MonoBehaviour
     {
         if (healthPoints <= 0)
             {
-                if (!gameObject.CompareTag("Player"))
+                if (gameObject.CompareTag("Enemy"))
                 {
                     GetComponent<MeshRenderer>().enabled = false;
+                    GetComponent<BoxCollider>().enabled = false;
+                    GetComponent<Enemy>().enabled = false;
                 }
                 explosion.SetActive(true);
+
             }
     }
 }
