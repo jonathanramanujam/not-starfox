@@ -1,11 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
     [SerializeField] private int healthPoints;
+    private int maxHealth;
     [SerializeField] private GameObject explosion;
+    [SerializeField] private Image energyMeter;
+
+    private void Start()
+    {
+        maxHealth = healthPoints;
+        UpdateHealthMeter();
+    }
 
     private void OnParticleCollision(GameObject other)
     {
@@ -15,6 +24,7 @@ public class Health : MonoBehaviour
             {
                 Debug.Log($"Hit: {LayerMask.LayerToName(gameObject.layer)}");
                 healthPoints--;
+                UpdateHealthMeter();
                 DeathCheck();
             }
         }
@@ -26,6 +36,7 @@ public class Health : MonoBehaviour
         if (other.collider.gameObject.CompareTag("Environment") || other.collider.gameObject.CompareTag("Enemy"))
         {
             healthPoints -= 3;
+            UpdateHealthMeter();
             DeathCheck();
         }
     }
@@ -43,5 +54,13 @@ public class Health : MonoBehaviour
                 explosion.SetActive(true);
 
             }
+    }
+
+    private void UpdateHealthMeter()
+    {
+        if (gameObject.tag == "Player")
+        {
+            energyMeter.fillAmount = (float)healthPoints / maxHealth;
+        }
     }
 }

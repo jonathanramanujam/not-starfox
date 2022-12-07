@@ -118,7 +118,7 @@ MonoBehaviour:
   player: {fileID: 0}
   laser: {fileID: 9195472832938841697}
   shotsPerSecond: 1
-  range: 150
+  range: 200
 --- !u!114 &8972856323112956445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +133,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthPoints: 20
   explosion: {fileID: 8972856324680931550}
-  rb: {fileID: 2387135372699070937}
 --- !u!95 &2696475382512569251
 Animator:
   serializedVersion: 4
@@ -330,6 +329,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: InitialModule.startColor.minMaxState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
       propertyPath: CollisionModule.m_Planes.Array.data[0]
       value: 
       objectReference: {fileID: 8972856323112956434}
@@ -346,12 +349,64 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.ctime1
+      value: 61102
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.ctime2
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.r
+      value: 0.9433962
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key2.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key2.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key2.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
       propertyPath: CollisionModule.m_EnergyLossOnCollision.scalar
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.m_NumColorKeys
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 223241109133242918, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a0e1ac61fc54034b929218d1807e1dd, type: 3}
