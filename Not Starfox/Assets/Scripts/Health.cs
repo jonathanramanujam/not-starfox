@@ -47,8 +47,8 @@ public class Health : MonoBehaviour
             {
                 if (gameObject.CompareTag("Enemy"))
                 {
-                    GetComponent<MeshRenderer>().enabled = false;
-                    GetComponent<BoxCollider>().enabled = false;
+                    GetComponentInChildren<MeshRenderer>().enabled = false;
+                    GetComponent<CapsuleCollider>().enabled = false;
                     GetComponent<Enemy>().enabled = false;
                 }
                 explosion.SetActive(true);
