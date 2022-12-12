@@ -9,7 +9,7 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private int healthPoints;
     private int maxHealth;
-    [SerializeField] private GameObject explosion;
+    private GameObject explosion;
     [SerializeField] private Image energyMeter;
     private ScoreTracker scoreTracker;
     private GameObject gameOver;
@@ -20,6 +20,7 @@ public class Health : MonoBehaviour
         maxHealth = healthPoints;
         UpdateHealthMeter();
         scoreTracker = FindObjectOfType<ScoreTracker>();
+        explosion = transform.Find("Explosion").gameObject;
         if (CompareTag("Player"))
         {
             gameOver = GameObject.FindGameObjectWithTag("Game Over");
