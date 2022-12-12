@@ -20,7 +20,6 @@ public class ParticleRange : MonoBehaviour
     {
         distanceToPlayer = transform.position.magnitude - player.transform.position.magnitude;
 
-        Debug.Log($"Distance: {distanceToPlayer}");
         if (distanceToPlayer <= enabledRange)
         {
             if (isPlaying) { return; }

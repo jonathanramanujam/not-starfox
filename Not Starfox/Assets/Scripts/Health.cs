@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Playables;
+using TMPro;
 
 public class Health : MonoBehaviour
 {
@@ -11,13 +12,19 @@ public class Health : MonoBehaviour
     [SerializeField] private GameObject explosion;
     [SerializeField] private Image energyMeter;
     private ScoreTracker scoreTracker;
-    private bool isAlive = true;
+    private GameObject gameOver;
+    public bool isAlive = true;
 
     private void Start()
     {
         maxHealth = healthPoints;
         UpdateHealthMeter();
         scoreTracker = FindObjectOfType<ScoreTracker>();
+        if (CompareTag("Player"))
+        {
+            gameOver = GameObject.FindGameObjectWithTag("Game Over");
+            gameOver.SetActive(false);
+        }
     }
 
     private void OnParticleCollision(GameObject other)
@@ -26,7 +33,6 @@ public class Health : MonoBehaviour
         {
             if (!other.CompareTag(tag))
             {
-                Debug.Log($"Hit: {LayerMask.LayerToName(gameObject.layer)}");
                 healthPoints--;
                 UpdateHealthMeter();
                 DeathCheck();
@@ -36,7 +42,6 @@ public class Health : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log($"Collided: {other.collider.gameObject.tag}");
         if (other.collider.gameObject.CompareTag("Environment") || other.collider.gameObject.CompareTag("Enemy"))
         {
             healthPoints -= 3;
@@ -49,7 +54,7 @@ public class Health : MonoBehaviour
     {
         if (healthPoints <= 0 && isAlive)
             {
-                if (gameObject.CompareTag("Enemy") )
+                if (gameObject.CompareTag("Enemy"))
                 {
                     GetComponentInChildren<MeshRenderer>().enabled = false;
                     GetComponent<CapsuleCollider>().enabled = false;
@@ -58,6 +63,7 @@ public class Health : MonoBehaviour
                 }
                 else
                 {
+                    gameOver.SetActive(true);
                     FindObjectOfType<PlayableDirector>().Pause();
                 }
                 explosion.SetActive(true);

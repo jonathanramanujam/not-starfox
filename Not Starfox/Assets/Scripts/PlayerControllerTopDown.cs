@@ -2,26 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerControllerTopDown : MonoBehaviour
 {
     [SerializeField] InputAction movement;
     [SerializeField] InputAction fire;
+    [SerializeField] InputAction proceed;
+    [SerializeField] InputAction quit;
     bool isFiring = false;
     [SerializeField] bool invertY = false;
     [SerializeField] float moveSpeed = 20f;
     [SerializeField] float XRange = 7f;
     [SerializeField] float minZRange= -1f;
     [SerializeField] float maxZRange= 15f;
-
-    // [SerializeField] float positionPitchFactor = -10f;
-    // [SerializeField] float controlPitchFactor = -30f;
-    // [SerializeField] float positionYawFactor = 20f;
     [SerializeField] float controlRollFactor = -40f;
 
     [SerializeField] ParticleSystem[] lasers;
     [SerializeField] ParticleSystem afterburner;
     ParticleSystem.EmissionModule afterburnerEmission;
+    [SerializeField] private Health playerHealth;
 
     void Start()
     {
@@ -32,12 +32,16 @@ public class PlayerControllerTopDown : MonoBehaviour
     {
         movement.Enable();
         fire.Enable();
+        proceed.Enable();
+        quit.Enable();
     }
 
     private void OnDisable()
     {
         movement.Disable();
         fire.Disable();
+        proceed.Disable();
+        quit.Disable();
     }
 
     void FixedUpdate()
@@ -46,6 +50,8 @@ public class PlayerControllerTopDown : MonoBehaviour
         AdjustPosition(out horizontalThrow, out verticalThrow);
         AdjustRotation(horizontalThrow, verticalThrow);
         ProcessFire();
+        ProcessRetry();
+        ProcessQuit();
     }
 
     private void AdjustPosition(out float horizontalThrow, out float verticalThrow)
@@ -85,15 +91,12 @@ public class PlayerControllerTopDown : MonoBehaviour
         float rollDueToControl = horizontalThrow * controlRollFactor;
         float roll = rollDueToControl;
 
-        Debug.Log("roll");
-
         transform.localRotation = Quaternion.Euler(0.0f, 0.0f, roll);
     }
     private void ProcessFire()
     {
         if (fire.IsPressed() && !isFiring)
         {
-            Debug.Log("Firing");
             isFiring = true;
             foreach (ParticleSystem laser in lasers)
             {
@@ -106,8 +109,25 @@ public class PlayerControllerTopDown : MonoBehaviour
         }
     }
 
-    // private void OnParticleCollision(GameObject other)
-    // {
-    //     Debug.Log($"Collision: {other.name}");
-    // }
+    private void ProcessRetry()
+    {
+        if (!playerHealth.isAlive)
+        {
+            if (proceed.IsPressed())
+            {
+                Debug.Log("Retrying...");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
+    }
+
+    private void ProcessQuit()
+    {
+        if (quit.IsPressed())
+        {
+            Debug.Log("Quitting...");
+            Application.Quit();
+        }
+    }
+
 }
