@@ -14,6 +14,7 @@ public class Health : MonoBehaviour
     private ScoreTracker scoreTracker;
     private GameObject gameOver;
     public bool isAlive = true;
+    [SerializeField] private AudioSource SFXdamage;
 
     private void Start()
     {
@@ -47,6 +48,7 @@ public class Health : MonoBehaviour
         {
             healthPoints -= 3;
             UpdateHealthMeter();
+            SFXdamage.Play();
             DeathCheck();
         }
     }
@@ -54,22 +56,26 @@ public class Health : MonoBehaviour
     private void DeathCheck()
     {
         if (healthPoints <= 0 && isAlive)
+        {
+            if (gameObject.CompareTag("Enemy"))
             {
-                if (gameObject.CompareTag("Enemy"))
-                {
-                    GetComponentInChildren<MeshRenderer>().enabled = false;
-                    GetComponent<CapsuleCollider>().enabled = false;
-                    GetComponent<Enemy>().enabled = false;
-                    scoreTracker.AddScore();
-                }
-                else
-                {
-                    gameOver.SetActive(true);
-                    FindObjectOfType<PlayableDirector>().Pause();
-                }
-                explosion.SetActive(true);
-                isAlive = false;
+                GetComponentInChildren<MeshRenderer>().enabled = false;
+                GetComponent<CapsuleCollider>().enabled = false;
+                GetComponent<Enemy>().enabled = false;
+                scoreTracker.AddScore();
             }
+            else
+            {
+                gameOver.SetActive(true);
+                FindObjectOfType<PlayableDirector>().Pause();
+            }
+            explosion.SetActive(true);
+            isAlive = false;
+        }
+        else
+        {
+            SFXdamage.Play();
+        }
     }
 
     private void UpdateHealthMeter()
