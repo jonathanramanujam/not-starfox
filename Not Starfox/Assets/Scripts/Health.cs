@@ -8,17 +8,18 @@ using TMPro;
 public class Health : MonoBehaviour
 {
     [SerializeField] private int healthPoints;
-    private int maxHealth;
+    private int health;
     private GameObject explosion;
     [SerializeField] private Image energyMeter;
     private ScoreTracker scoreTracker;
     private GameObject gameOver;
     public bool isAlive = true;
     [SerializeField] private AudioSource SFXdamage;
+    [SerializeField] private ParticleSystem damageSparks;
 
     private void Start()
     {
-        maxHealth = healthPoints;
+        health = healthPoints;
         UpdateHealthMeter();
         scoreTracker = FindObjectOfType<ScoreTracker>();
         explosion = transform.Find("Explosion").gameObject;
@@ -29,13 +30,28 @@ public class Health : MonoBehaviour
         }
     }
 
+    public void ResetHealth()
+    {
+        isAlive = true;
+        health = healthPoints;
+        UpdateHealthMeter();
+        GetComponentInChildren<MeshRenderer>().enabled = true;
+        GetComponent<CapsuleCollider>().enabled = true;
+        explosion.SetActive(false);
+        if (TryGetComponent<Enemy>(out Enemy enemy))
+        {
+            enemy.enabled = true;
+        }
+    }
+
     private void OnParticleCollision(GameObject other)
     {
         if (other.layer == LayerMask.NameToLayer("Lasers"))
         {
             if (!other.CompareTag(tag))
             {
-                healthPoints--;
+
+                health--;
                 UpdateHealthMeter();
                 DeathCheck();
             }
@@ -46,7 +62,7 @@ public class Health : MonoBehaviour
     {
         if (other.collider.gameObject.CompareTag("Environment") || other.collider.gameObject.CompareTag("Enemy"))
         {
-            healthPoints -= 3;
+            health -= 3;
             UpdateHealthMeter();
             SFXdamage.Play();
             DeathCheck();
@@ -55,7 +71,7 @@ public class Health : MonoBehaviour
 
     private void DeathCheck()
     {
-        if (healthPoints <= 0 && isAlive)
+        if (health <= 0 && isAlive)
         {
             if (gameObject.CompareTag("Enemy"))
             {
@@ -66,14 +82,18 @@ public class Health : MonoBehaviour
             }
             else
             {
-                gameOver.SetActive(true);
-                FindObjectOfType<PlayableDirector>().Pause();
+                if (FindObjectOfType<PlayableDirector>().state == PlayState.Playing)
+                {
+                    gameOver.SetActive(true);
+                    FindObjectOfType<PlayableDirector>().Pause();
+                }
             }
             explosion.SetActive(true);
             isAlive = false;
         }
         else
         {
+            damageSparks.Play();
             SFXdamage.Play();
         }
     }
@@ -82,7 +102,7 @@ public class Health : MonoBehaviour
     {
         if (gameObject.tag == "Player")
         {
-            energyMeter.fillAmount = (float)healthPoints / maxHealth;
+            energyMeter.fillAmount = (float)health / (float)healthPoints;
         }
     }
 }

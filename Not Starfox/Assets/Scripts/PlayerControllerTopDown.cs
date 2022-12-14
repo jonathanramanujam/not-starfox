@@ -58,7 +58,6 @@ public class PlayerControllerTopDown : MonoBehaviour
         AdjustPosition(out horizontalThrow, out verticalThrow);
         AdjustRotation(horizontalThrow, verticalThrow);
         ProcessFire();
-        ProcessRetry();
         ProcessQuit();
     }
 
@@ -138,16 +137,9 @@ public class PlayerControllerTopDown : MonoBehaviour
         }
     }
 
-    private void ProcessRetry()
+    public void ProcessRetry()
     {
-        if (!playerHealth.isAlive)
-        {
-            if (proceed.IsPressed())
-            {
-                Debug.Log("Retrying...");
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
-        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void ProcessQuit()

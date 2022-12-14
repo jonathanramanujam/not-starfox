@@ -20,6 +20,12 @@ public class ScoreTracker : MonoBehaviour
         scoreText.text = score.ToString("D3");
     }
 
+    public void ResetScore()
+    {
+        score = 0;
+        scoreText.text = score.ToString("D3");
+    }
+
     public int GetScore()
     {
         return score;
