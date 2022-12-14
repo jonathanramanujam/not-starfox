@@ -50,7 +50,6 @@ public class Health : MonoBehaviour
         {
             if (!other.CompareTag(tag))
             {
-
                 health--;
                 UpdateHealthMeter();
                 DeathCheck();
