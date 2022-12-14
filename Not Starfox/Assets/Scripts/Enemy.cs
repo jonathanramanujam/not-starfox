@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     private float fireRate;
     [SerializeField] private float range;
     private float distanceToPlayer;
+    [SerializeField] private AudioSource SFXlaser;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +47,7 @@ public class Enemy : MonoBehaviour
         if (counter > fireRate)
         {
             laser.Play();
+            SFXlaser.Play();
             counter = 0;
         }
     }

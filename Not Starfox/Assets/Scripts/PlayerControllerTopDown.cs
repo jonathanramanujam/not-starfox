@@ -23,6 +23,14 @@ public class PlayerControllerTopDown : MonoBehaviour
     ParticleSystem.EmissionModule afterburnerEmission;
     [SerializeField] private Health playerHealth;
 
+    [SerializeField] AudioSource SFXshipHum;
+    [SerializeField] AudioSource SFXlaser;
+    [SerializeField] AudioSource SFXboost;
+    [SerializeField] AudioSource SFXbrake;
+
+    private bool isBoosting = false;
+    private bool isBraking = false;
+
     void Start()
     {
         afterburnerEmission = afterburner.emission;
@@ -59,14 +67,34 @@ public class PlayerControllerTopDown : MonoBehaviour
         if (movement.ReadValue<Vector2>().y > 0)
         {
             afterburnerEmission.rateOverTime = 250;
+            if (!isBoosting)
+            {
+                SFXboost.Play();
+                SFXshipHum.pitch = 1.3f;
+            }
+            isBoosting = true;
+            isBraking = false;
         }
         else if (movement.ReadValue<Vector2>().y < 0)
         {
             afterburnerEmission.rateOverTime = 10;
+            if (!isBraking)
+            {
+                SFXbrake.Play();
+                SFXshipHum.pitch = .7f;
+            }
+            isBraking = true;
+            isBoosting = false;
         }
         else
         {
             afterburnerEmission.rateOverTime = 100;
+            if (isBraking || isBoosting)
+            {
+                SFXshipHum.pitch = 1f;
+            }
+            isBraking = false;
+            isBoosting = false;
         }
 
         horizontalThrow = movement.ReadValue<Vector2>().x;
@@ -102,6 +130,7 @@ public class PlayerControllerTopDown : MonoBehaviour
             {
                 laser.Play();
             }
+            SFXlaser.Play();
         }
         else if (!fire.IsPressed() && isFiring)
         {
