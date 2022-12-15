@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 223241109133242916}
   - component: {fileID: 223241109133242918}
   - component: {fileID: 223241109133242919}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Laser Buckshot
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
