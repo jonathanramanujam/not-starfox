@@ -8,7 +8,7 @@ using TMPro;
 public class Health : MonoBehaviour
 {
     [SerializeField] private int healthPoints;
-    private int health;
+    public int health;
     private GameObject explosion;
     [SerializeField] private Image energyMeter;
     private ScoreTracker scoreTracker;
@@ -16,6 +16,7 @@ public class Health : MonoBehaviour
     public bool isAlive = true;
     [SerializeField] private AudioSource SFXdamage;
     [SerializeField] private ParticleSystem damageSparks;
+    [SerializeField] private MeshRenderer[] meshes;
 
     private void Start()
     {
@@ -23,6 +24,8 @@ public class Health : MonoBehaviour
         UpdateHealthMeter();
         scoreTracker = FindObjectOfType<ScoreTracker>();
         explosion = transform.Find("Explosion").gameObject;
+
+        meshes = GetComponentsInChildren<MeshRenderer>();
         if (CompareTag("Player"))
         {
             gameOver = GameObject.FindGameObjectWithTag("Game Over");
@@ -35,8 +38,18 @@ public class Health : MonoBehaviour
         isAlive = true;
         health = healthPoints;
         UpdateHealthMeter();
-        GetComponentInChildren<MeshRenderer>().enabled = true;
-        GetComponent<CapsuleCollider>().enabled = true;
+        foreach (MeshRenderer mesh in meshes)
+        {
+            mesh.enabled = true;
+        }
+        if (TryGetComponent<CapsuleCollider>(out CapsuleCollider capsuleCollider))
+        {
+            capsuleCollider.enabled = true;
+        }
+        else if (TryGetComponent<BoxCollider>(out BoxCollider boxCollider))
+        {
+            boxCollider.enabled = true;
+        }
         explosion.SetActive(false);
         if (TryGetComponent<Enemy>(out Enemy enemy))
         {
@@ -74,9 +87,22 @@ public class Health : MonoBehaviour
         {
             if (gameObject.CompareTag("Enemy"))
             {
-                GetComponentInChildren<MeshRenderer>().enabled = false;
-                GetComponent<CapsuleCollider>().enabled = false;
-                GetComponent<Enemy>().enabled = false;
+                foreach (MeshRenderer mesh in meshes)
+                {
+                    mesh.enabled = false;
+                }
+                if (TryGetComponent<CapsuleCollider>(out CapsuleCollider capsuleCollider))
+                {
+                    capsuleCollider.enabled = false;
+                }
+                if (TryGetComponent<BoxCollider>(out BoxCollider boxCollider))
+                {
+                    boxCollider.enabled = false;
+                }
+                if (TryGetComponent<Enemy>(out Enemy enemy))
+                {
+                    enemy.enabled = false;
+                }
                 scoreTracker.AddScore();
             }
             else
@@ -85,6 +111,14 @@ public class Health : MonoBehaviour
                 {
                     gameOver.SetActive(true);
                     FindObjectOfType<PlayableDirector>().Pause();
+                }
+            }
+            Transform[] children = GetComponentsInChildren<Transform>();
+            foreach (Transform child in children)
+            {
+                if (child.gameObject.layer == LayerMask.NameToLayer("Lasers"))
+                {
+                    child.gameObject.SetActive(false);
                 }
             }
             explosion.SetActive(true);
