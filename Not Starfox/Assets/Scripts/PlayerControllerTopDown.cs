@@ -35,6 +35,7 @@ public class PlayerControllerTopDown : MonoBehaviour
 
     private bool isBoosting = false;
     private bool isBraking = false;
+    private bool isPlaying = false;
 
     void Start()
     {
@@ -153,9 +154,8 @@ public class PlayerControllerTopDown : MonoBehaviour
 
     private void ProcessPause()
     {
-        if (pause.WasPressedThisFrame())
+        if (pause.WasPressedThisFrame() && isPlaying)
         {
-            Debug.Log("Pause Pressed");
             if (!pauseMenu.activeInHierarchy)
             {
                 pauseMenu.SetActive(true);
@@ -168,6 +168,11 @@ public class PlayerControllerTopDown : MonoBehaviour
                 Time.timeScale = 1f;
             }
         }
+    }
+
+    public void SetGameState(bool isPlaying)
+    {
+        this.isPlaying = isPlaying;
     }
 
     public void SelectFirstButton(GameObject menu)

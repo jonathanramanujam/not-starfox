@@ -110,7 +110,11 @@ public class Health : MonoBehaviour
                 if (FindObjectOfType<PlayableDirector>().state == PlayState.Playing)
                 {
                     gameOver.SetActive(true);
-                    FindObjectOfType<PlayableDirector>().Pause();
+                    Time.timeScale = 0f;
+
+                    PlayerControllerTopDown playerController = FindObjectOfType<PlayerControllerTopDown>();
+                    playerController.SetGameState(false);
+                    playerController.SelectFirstButton(gameOver);
                 }
             }
             Transform[] children = GetComponentsInChildren<Transform>();
