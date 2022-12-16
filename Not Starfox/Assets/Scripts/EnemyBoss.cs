@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class EnemyBoss : MonoBehaviour
 {
     [SerializeField] GameObject player;
-    [SerializeField] ParticleSystem[] cannons;
+    [SerializeField] GameObject[] cannons;
     [SerializeField] GameObject coreCannon;
     private float counter;
     [SerializeField] float shotsPerSecond; // shots per second
@@ -23,6 +25,13 @@ public class EnemyBoss : MonoBehaviour
     [SerializeField] private Health topRightCannon;
     [SerializeField] private Health bottomRightCannon;
     [SerializeField] private GameObject shield;
+
+    [SerializeField] private GameObject energyDisplay;
+    [SerializeField] private GameObject scoreDisplay;
+    [SerializeField] private GameObject successDisplay;
+    [SerializeField] private TextMeshProUGUI finalScore;
+
+
 
     private int numDeadCannons = 0;
 
@@ -83,35 +92,33 @@ public class EnemyBoss : MonoBehaviour
 
                 anim.Play(animations[bossAction]);
             }
-            // SFXlaser.Play();
-            counter = 0;
         }
     }
 
     private void CheckHealth()
     {
         int dead = 0;
-        if (leftCannon.health <= 0)
+        if (!leftCannon.isAlive)
         {
             dead++;
             animations.Remove("Firing Layer.Left");
         }
 
-        if (topRightCannon.health <= 0)
+        if (!topRightCannon.isAlive)
         {
             animations.Remove("Firing Layer.Right Top");
             animations.Remove("Firing Layer.Right Both");
             dead++;
         }
 
-        if (bottomRightCannon.health <= 0)
+        if (!bottomRightCannon.isAlive)
         {
             animations.Remove("Firing Layer.Right Bottom");
             animations.Remove("Firing Layer.Right Both");
             dead++;
         }
 
-        if (leftCannon.health <= 0 && topRightCannon.health <= 0 && bottomRightCannon.health <= 0)
+        if (!leftCannon.isAlive && !topRightCannon.isAlive && !bottomRightCannon.isAlive)
         {
             if (shield.activeSelf)
             {
@@ -119,13 +126,26 @@ public class EnemyBoss : MonoBehaviour
                 animations.Add("Firing Layer.Core");
             }
             shield.SetActive(false);
-            coreCannon.GetComponent<ParticleSystem>().Play();
+            if (counter >= fireRate)
+            {
+                coreCannon.GetComponent<AudioSource>().Play();
+                coreCannon.GetComponent<ParticleSystem>().Play();
+                counter = 0;
+            }
         }
 
-        if (core.health <= 0)
+        if (!core.isAlive)
         {
             coreCannon.GetComponent<ParticleSystem>().Stop();
+            coreCannon.GetComponent<AudioSource>().Stop();
             // Score Screen
+            energyDisplay.SetActive(false);
+            scoreDisplay.SetActive(false);
+            successDisplay.SetActive(true);
+            int score = FindObjectOfType<ScoreTracker>().GetScore();
+            int health = player.GetComponent<Health>().health;
+            finalScore.text = $"{score} Enemies Destroyed \n {health} Health Remaining \n Final Score \n {score + health}";
+            player.GetComponent<PlayerControllerTopDown>().SelectFirstButton(successDisplay);
         }
 
         if (dead > numDeadCannons)
@@ -177,6 +197,7 @@ public class EnemyBoss : MonoBehaviour
 
     private void FireCannon(int index)
     {
-        cannons[index].Play();
+        cannons[index].GetComponent<ParticleSystem>().Play();
+        cannons[index].GetComponent<AudioSource>().Play();
     }
 }
