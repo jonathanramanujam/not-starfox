@@ -122,6 +122,12 @@ public class EnemyBoss : MonoBehaviour
             coreCannon.GetComponent<ParticleSystem>().Play();
         }
 
+        if (core.health <= 0)
+        {
+            coreCannon.GetComponent<ParticleSystem>().Stop();
+            // Score Screen
+        }
+
         if (dead > numDeadCannons)
         {
             numDeadCannons = dead;

@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerControllerTopDown : MonoBehaviour
 {
     [SerializeField] InputAction movement;
+    [SerializeField] InputAction menuSelect;
     [SerializeField] InputAction fire;
     [SerializeField] InputAction proceed;
+    [SerializeField] InputAction pause;
     [SerializeField] InputAction quit;
     bool isFiring = false;
     [SerializeField] bool invertY = false;
@@ -28,6 +31,8 @@ public class PlayerControllerTopDown : MonoBehaviour
     [SerializeField] AudioSource SFXboost;
     [SerializeField] AudioSource SFXbrake;
 
+    [SerializeField] GameObject pauseMenu;
+
     private bool isBoosting = false;
     private bool isBraking = false;
 
@@ -39,16 +44,20 @@ public class PlayerControllerTopDown : MonoBehaviour
     private void OnEnable()
     {
         movement.Enable();
+        menuSelect.Enable();
         fire.Enable();
         proceed.Enable();
+        pause.Enable();
         quit.Enable();
     }
 
     private void OnDisable()
     {
         movement.Disable();
+        menuSelect.Disable();
         fire.Disable();
         proceed.Disable();
+        pause.Disable();
         quit.Disable();
     }
 
@@ -61,9 +70,14 @@ public class PlayerControllerTopDown : MonoBehaviour
         ProcessQuit();
     }
 
+    private void Update()
+    {
+        ProcessPause();
+    }
+
     private void AdjustPosition(out float horizontalThrow, out float verticalThrow)
     {
-        if (movement.ReadValue<Vector2>().y > 0)
+        if (movement.ReadValue<Vector2>().y > .5f)
         {
             afterburnerEmission.rateOverTime = 250;
             if (!isBoosting)
@@ -74,7 +88,7 @@ public class PlayerControllerTopDown : MonoBehaviour
             isBoosting = true;
             isBraking = false;
         }
-        else if (movement.ReadValue<Vector2>().y < 0)
+        else if (movement.ReadValue<Vector2>().y < -.5f)
         {
             afterburnerEmission.rateOverTime = 10;
             if (!isBraking)
@@ -135,6 +149,37 @@ public class PlayerControllerTopDown : MonoBehaviour
         {
             isFiring = false;
         }
+    }
+
+    private void ProcessPause()
+    {
+        if (pause.WasPressedThisFrame())
+        {
+            Debug.Log("Pause Pressed");
+            if (!pauseMenu.activeInHierarchy)
+            {
+                pauseMenu.SetActive(true);
+                Time.timeScale = 0f;
+                SelectFirstButton(pauseMenu);
+            }
+            else
+            {
+                pauseMenu.SetActive(false);
+                Time.timeScale = 1f;
+            }
+        }
+    }
+
+    public void SelectFirstButton(GameObject menu)
+    {
+        Button[] buttons = menu.GetComponentsInChildren<Button>();
+        buttons[0].Select();
+    }
+
+    public void Unpause()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     public void ProcessRetry()
