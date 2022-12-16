@@ -231,6 +231,15 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.7481604, z: 0.33333334}
       - serializedVersion: 3
+        time: 7.016667
+        value: {x: -23, y: 7, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
         time: 9.016666
         value: {x: -23, y: -10, z: 0}
         inSlope: {x: 0, y: -0.016244836, z: 0}
@@ -426,6 +435,15 @@ AnimationClip:
         weightedMode: 3
         inWeight: 0.33333334
         outWeight: 0.7481604
+      - serializedVersion: 3
+        time: 7.016667
+        value: 7
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 9.016666
         value: -10
@@ -1016,28 +1034,21 @@ AnimationClip:
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 3.1666667
+  - time: 4.016667
     functionName: FireCannon
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
-  - time: 5.016667
-    functionName: FireCannon
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 2
-    messageOptions: 0
-  - time: 6.983333
+  - time: 4.016667
     functionName: FireCannon
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
-  - time: 9.033334
+  - time: 7
     functionName: FireCannon
     data: 
     objectReferenceParameter: {fileID: 0}

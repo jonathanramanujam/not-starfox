@@ -6,6 +6,7 @@ public class EnemyBoss : MonoBehaviour
 {
     [SerializeField] GameObject player;
     [SerializeField] ParticleSystem[] cannons;
+    [SerializeField] GameObject coreCannon;
     private float counter;
     [SerializeField] float shotsPerSecond; // shots per second
     private float fireRate;
@@ -22,6 +23,8 @@ public class EnemyBoss : MonoBehaviour
     [SerializeField] private Health topRightCannon;
     [SerializeField] private Health bottomRightCannon;
     [SerializeField] private GameObject shield;
+
+    private int numDeadCannons = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +44,11 @@ public class EnemyBoss : MonoBehaviour
             counter += Time.deltaTime;
             ProcessFire();
             CheckHealth();
+            if (numDeadCannons == 3)
+            {
+                transform.LookAt(player.transform);
+                coreCannon.transform.LookAt(player.transform);
+            }
         }
     }
 
@@ -74,8 +82,6 @@ public class EnemyBoss : MonoBehaviour
                 int bossAction = Random.Range(0, animations.Count);
 
                 anim.Play(animations[bossAction]);
-                Debug.Log($"Playing Animation: {animations[bossAction]}");
-
             }
             // SFXlaser.Play();
             counter = 0;
@@ -84,10 +90,10 @@ public class EnemyBoss : MonoBehaviour
 
     private void CheckHealth()
     {
-        int numDeadCannons = 0;
+        int dead = 0;
         if (leftCannon.health <= 0)
         {
-            numDeadCannons++;
+            dead++;
             animations.Remove("Firing Layer.Left");
         }
 
@@ -95,27 +101,30 @@ public class EnemyBoss : MonoBehaviour
         {
             animations.Remove("Firing Layer.Right Top");
             animations.Remove("Firing Layer.Right Both");
-            numDeadCannons++;
+            dead++;
         }
 
         if (bottomRightCannon.health <= 0)
         {
             animations.Remove("Firing Layer.Right Bottom");
             animations.Remove("Firing Layer.Right Both");
-            numDeadCannons++;
+            dead++;
         }
-
-        // if (topRightCannon.health <= 0 && bottomRightCannon.health <= 0)
-        // {
-        //     animations.Remove("Firing Layer.Right Both");
-        // }
 
         if (leftCannon.health <= 0 && topRightCannon.health <= 0 && bottomRightCannon.health <= 0)
         {
-            Debug.Log("Removing Shield");
+            if (shield.activeSelf)
+            {
+                animations.Remove("Firing Layer.Idle");
+                animations.Add("Firing Layer.Core");
+            }
             shield.SetActive(false);
-            animations.Add("Firing Layer.Idle");
-            animations.Add("Firing Layer.Core");
+            coreCannon.GetComponent<ParticleSystem>().Play();
+        }
+
+        if (dead > numDeadCannons)
+        {
+            numDeadCannons = dead;
         }
 
         UpdateHeadlights(numDeadCannons);
