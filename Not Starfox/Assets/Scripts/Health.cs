@@ -118,7 +118,7 @@ public class Health : MonoBehaviour
             {
                 if (child.gameObject.layer == LayerMask.NameToLayer("Lasers"))
                 {
-                    child.gameObject.SetActive(false);
+                    child.GetComponent<ParticleSystem>().Stop();
                 }
             }
             explosion.SetActive(true);

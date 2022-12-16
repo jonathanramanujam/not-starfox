@@ -15,6 +15,8 @@ public class EnemyBoss : MonoBehaviour
     private Animator anim;
     private List<string> animations;
 
+    [SerializeField] private GameObject[] headlights;
+
     [SerializeField] private Health core;
     [SerializeField] private Health leftCannon;
     [SerializeField] private Health topRightCannon;
@@ -46,7 +48,10 @@ public class EnemyBoss : MonoBehaviour
     {
         animations.Add("Firing Layer.Idle");
         animations.Add("Firing Layer.Left");
-        animations.Add("Firing Layer.Right");
+        animations.Add("Firing Layer.Right Both");
+        animations.Add("Firing Layer.Right Top");
+        animations.Add("Firing Layer.Right Bottom");
+
     }
 
     private bool PlayerInRange()
@@ -69,6 +74,7 @@ public class EnemyBoss : MonoBehaviour
                 int bossAction = Random.Range(0, animations.Count);
 
                 anim.Play(animations[bossAction]);
+                Debug.Log($"Playing Animation: {animations[bossAction]}");
 
             }
             // SFXlaser.Play();
@@ -78,27 +84,84 @@ public class EnemyBoss : MonoBehaviour
 
     private void CheckHealth()
     {
+        int numDeadCannons = 0;
         if (leftCannon.health <= 0)
         {
+            numDeadCannons++;
             animations.Remove("Firing Layer.Left");
         }
 
-        if (topRightCannon.health <= 0 && bottomRightCannon.health <= 0)
+        if (topRightCannon.health <= 0)
         {
-            animations.Remove("Firing Layer.Right");
+            animations.Remove("Firing Layer.Right Top");
+            animations.Remove("Firing Layer.Right Both");
+            numDeadCannons++;
         }
+
+        if (bottomRightCannon.health <= 0)
+        {
+            animations.Remove("Firing Layer.Right Bottom");
+            animations.Remove("Firing Layer.Right Both");
+            numDeadCannons++;
+        }
+
+        // if (topRightCannon.health <= 0 && bottomRightCannon.health <= 0)
+        // {
+        //     animations.Remove("Firing Layer.Right Both");
+        // }
 
         if (leftCannon.health <= 0 && topRightCannon.health <= 0 && bottomRightCannon.health <= 0)
         {
             Debug.Log("Removing Shield");
             shield.SetActive(false);
-            // Add the new core animation
+            animations.Add("Firing Layer.Idle");
+            animations.Add("Firing Layer.Core");
+        }
+
+        UpdateHeadlights(numDeadCannons);
+    }
+
+    private void UpdateHeadlights(int numDeadCannons)
+    {
+        if (numDeadCannons == 1)
+        {
+            headlights[0].SetActive(false);
+            //change emission to yellow
+            Color yellow = new Vector4(1.5f, 1.3f, 0f, 1f);
+            foreach (GameObject headlight in headlights)
+            {
+                headlight.GetComponent<Renderer>().material.SetColor("_EmissionColor", yellow);
+            }
+        }
+
+        else if (numDeadCannons == 2)
+        {
+            headlights[0].SetActive(false);
+            headlights[1].SetActive(false);
+            //change emission to orange
+            Color orange = new Vector4(1.8f, .5f, 0f, 1.3f);
+            foreach (GameObject headlight in headlights)
+            {
+                headlight.GetComponent<Renderer>().material.SetColor("_EmissionColor", orange);
+            }
+        }
+
+        else if (numDeadCannons == 3)
+        {
+            headlights[0].SetActive(false);
+            headlights[1].SetActive(false);
+            headlights[2].SetActive(false);
+            //change emission to red
+            Color red = new Vector4(1.8f, 0f, 0f, 1.3f);
+            foreach (GameObject headlight in headlights)
+            {
+                headlight.GetComponent<Renderer>().material.SetColor("_EmissionColor", red);
+            }
         }
     }
 
     private void FireCannon(int index)
     {
-
         cannons[index].Play();
     }
 }
