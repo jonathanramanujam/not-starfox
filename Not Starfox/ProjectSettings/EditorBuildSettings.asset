@@ -4,6 +4,9 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Corneria.unity
+    guid: b248b38e768dead4a8fc063234af85af
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 138fd741dcb7ef24e87ee7ce03904983, type: 2}

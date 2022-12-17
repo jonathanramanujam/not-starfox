@@ -12,7 +12,6 @@ public class PlayerControllerTopDown : MonoBehaviour
     [SerializeField] InputAction fire;
     [SerializeField] InputAction proceed;
     [SerializeField] InputAction pause;
-    [SerializeField] InputAction quit;
     bool isFiring = false;
     [SerializeField] bool invertY = false;
     [SerializeField] float moveSpeed = 20f;
@@ -49,7 +48,6 @@ public class PlayerControllerTopDown : MonoBehaviour
         fire.Enable();
         proceed.Enable();
         pause.Enable();
-        quit.Enable();
     }
 
     private void OnDisable()
@@ -59,7 +57,6 @@ public class PlayerControllerTopDown : MonoBehaviour
         fire.Disable();
         proceed.Disable();
         pause.Disable();
-        quit.Disable();
     }
 
     void FixedUpdate()
@@ -68,7 +65,6 @@ public class PlayerControllerTopDown : MonoBehaviour
         AdjustPosition(out horizontalThrow, out verticalThrow);
         AdjustRotation(horizontalThrow, verticalThrow);
         ProcessFire();
-        ProcessQuit();
     }
 
     private void Update()
@@ -192,13 +188,9 @@ public class PlayerControllerTopDown : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    private void ProcessQuit()
+    public void Quit()
     {
-        if (quit.IsPressed())
-        {
-            Debug.Log("Quitting...");
-            Application.Quit();
-        }
+        Application.Quit();
     }
 
 }
