@@ -134,7 +134,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 1.1
+  bundleVersion: 1.2
   preloadedAssets:
   - {fileID: 11400000, guid: 138fd741dcb7ef24e87ee7ce03904983, type: 2}
   metroInputSource: 0
@@ -156,7 +156,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Standalone: com.DefaultCompany.Not-Starfox
+    Standalone: com.Jonathan-Ramanujam.Not-Starfox
   buildNumber:
     Standalone: 0
     iPhone: 0
